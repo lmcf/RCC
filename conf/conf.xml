@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+ <LOGS>
+     <error>LOGS/error.log</error>
+     <warn>LOGS/warm.log</warn>
+     <debug>LOGS/debug.log</debug>
+ </LOGS>
+ <LITERALES>
+     <error_literal>Literal no existe o mensaje vacío</error_literal>
+ </LITERALES>
+ 
+</config>

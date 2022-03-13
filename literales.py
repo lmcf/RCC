@@ -7,6 +7,7 @@ Created on Sun Mar 13 15:16:38 2022
 
 import xml.etree.ElementTree as ET
 
+# Devuelve literal de la configuración en base al hijo y padre. Teniendo como root config
 def get_literal( name = 'error_literal', parent = 'LITERALES'):
      literal_txt = ''
      CONFIG = ET.parse('conf\\conf.xml').getroot()
@@ -14,7 +15,8 @@ def get_literal( name = 'error_literal', parent = 'LITERALES'):
              literal_txt = element.find(name).text
              
      return literal_txt
-    
+ 
+# Devuele información de tag dentro de LOGS
 def get_log_path( name ):
     parent = 'LOGS'
     return get_literal(name, parent)

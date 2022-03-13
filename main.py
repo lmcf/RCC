@@ -4,17 +4,19 @@ Created on Sun Mar 13 14:36:47 2022
 
 @author: calde
 """
-from functions import msglog, closeLogging
-import literales as l
+from functions import *
+data = {
+       'msg':'INICIO :: {} del archivo {}',
+       'args' : [
+           'Prueba',
+           __file__
+       ]
+}
 
-#msglog f
-msglog("Laurita ",l.NAME_DEBUG)
+msglog(data,l.NAME_INFO)
 
-msglog("Error mode",l.NAME_ERROR)
 
-msglog("info mode",l.NAME_INFO)
 
-msglog("warm mode",l.NAME_WARN)
 
 
 closeLogging()

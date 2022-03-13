@@ -5,17 +5,22 @@ Created on Sun Mar 13 15:09:41 2022
 @author: calde
 """
 
-import xml.etree.ElementTree as ET
+from logger import Logs
+import literales as l
+import logging
 
-def get_literal( name = 'error_literal', parent = 'LITERALES'):
-     literal_txt = ''
-     CONFIG = ET.parse('conf\\conf.xml').getroot()
-     for element in  CONFIG.findall(parent):
-             literal_txt = element.find(name).text
-             
-     return literal_txt
- 
-    
-def get_log_path( name ):
-    parent = 'LOGS'
-    return get_literal(name, parent)
+def msglog(msg, logger):
+   if(logger == l.NAME_WARN):
+        path = l.PATH_WARN
+   elif(logger == l.NAME_INFO):
+       path = l.PATH_INFO
+   elif(logger == l.NAME_ERROR):
+       path = l.PATH_ERROR
+   else:
+       path = l.PATH_DEBUG
+
+   X = Logs(logger, path)
+   X.msg(msg)
+   
+def closeLogging():
+    logging.shutdown()

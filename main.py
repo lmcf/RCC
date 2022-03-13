@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Mar 12 13:27:28 2022
+Created on Sun Mar 13 14:36:47 2022
 
 @author: calde
 """
+from functions import *
+data = {
+       'msg':'INICIO :: {} del archivo {}',
+       'args' : [
+           'Prueba',
+           __file__
+       ]
+}
 
-from logger import Logs as L
+msglog(data,l.NAME_INFO)
 
 
-b = L('debug')
-b.msg("azucaar")
-
-a = L('error')
-
-a.msg("dasdas")
-
-
-
+closeLogging()
 

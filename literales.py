@@ -38,3 +38,25 @@ NAME_INFO   = get_log_path('name_info')
 NAME_WARN   = get_log_path('name_warn')
 
 
+# CONST
+# COLORS
+COLOR_SUCCESS = '#00ff00'   # Green
+COLOR_INACTIVE = '#ffff66'  # Yellow
+COLOR_DANGER = '#ff0000'    # Red
+COLOR_DANGER_ACTIVE = '#cc0000' # Darker red
+COLOR_WHITE = '#fff'
+COLOR_BLACK = '#000'
+COLOR_INTERMITENTE = '#FFC300'
+COLOR_DISABLED = '#a1a5ab'
+BG_COLOR = '#f5f5dc'
+
+# FONTS
+FONT_STYLE_TXT = ('Helvetica' , 14)
+FONT_STYLE_TITLE = ('Helvetica' , 16, 'bold')
+
+#BUTTONS
+BTN_SYSTEM_WIDTH = 10
+
+#LABELS
+LBL_FIXED_WIDTH = 15
+LBL_SQUARE_WIDTH_HEIGHT = 5

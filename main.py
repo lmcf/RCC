@@ -18,8 +18,16 @@ data = {
 msglog(data, l.NAME_INFO)
 from tkinter import *
 from tkinter import ttk
-from functools import partial
 
+
+from gpiozero import LED, Motor
+from gpiozero.pins.pigpio import PiGPIOFactory
+
+
+factory = PiGPIOFactory(host='192.168.31.150')
+ledon = LED(17, pin_factory=factory)
+#motor1 = Motor(23, 24, pwm=True, pin_factory=factory)
+#motor1.forward()
 
 # Modulo de sistema
 # Lo usaremos para desactivar el keystroke si hacemos hold en alguna tecla
@@ -50,7 +58,10 @@ class GUI:
         deadlight.title("RC Control")
 
         #
-        self.onoff = False
+        self.onoff_up = False
+        self.onoff_down = False
+        self.onoff_right = False
+        self.onoff_left = False
 
         # Usaremos el widget style de tkinter para darle color a botones
         self.style = ttk.Style(root)
@@ -110,6 +121,7 @@ class GUI:
         root.bind("<KeyPress>", self.move_rc)
         root.bind("<KeyRelease>", self.move_rc)
 
+
     def move_rc(self, event):
         # Recogemos la telca pulsada
         key = event.keysym
@@ -133,47 +145,59 @@ class GUI:
         self.lbl_back.config(bg=l.COLOR_INACTIVE)
         self.lbl_left.config(bg=l.COLOR_INACTIVE)
         self.lbl_right.config(bg=l.COLOR_INACTIVE)
+        self.lbl_up.config(bg=l.COLOR_INACTIVE)
 
-        self.onoff = False if self.onoff else True
         # motor1 = 0 - motor2 = 0
 
+
+
         if key == "Up":
-            if self.onoff:
+            self.onoff_up = False if self.onoff_up else True
+            if self.onoff_up:
+                ledon.on()
                 self.lbl_up.config(bg=l.COLOR_SUCCESS)
-                # otor1/Izquierdo = 1 - motor2/derecho = 1
+                # motor1/Izquierdo = 1 - motor2/derecho = 1
 
             else:
+                ledon.off()
                 self.lbl_up.config(bg=l.COLOR_INACTIVE)
-                # otor1/Izquierdo = 0 - motor2/derecho = 0
+                # motor1/Izquierdo = 0 - motor2/derecho = 0
 
         elif key == 'Down':
-            if self.onoff:
+            self.onoff_down = False if self.onoff_down else True
+            if self.onoff_down:
+                ledon.on()
                 self.lbl_back.config(bg=l.COLOR_SUCCESS)
                 #  motor1/Izquierdo = -1 - motor2/derecho = -1
 
             else:
+                ledon.off()
                 self.lbl_back.config(bg=l.COLOR_INACTIVE)
                 #  motor1/Izquierdo = 0 - motor2/derecho = 0
 
         elif key == 'Right':
-            if self.onoff:
+            self.onoff_right = False if self.onoff_right else True
+            if self.onoff_right:
+                ledon.on()
                 self.lbl_right.config(bg=l.COLOR_SUCCESS)
                 #  motor1/Izquierdo = 1 - motor2/derecho = -1
 
             else:
+                ledon.off()
                 self.lbl_right.config(bg=l.COLOR_INACTIVE)
                 # motor1/Izquierdo = 0 - motor2/derecho = 0
 
         elif key == 'Left':
-            if self.onoff:
+            self.onoff_left = False if self.onoff_left else True
+            if self.onoff_left:
+                ledon.on()
                 self.lbl_left.config(bg=l.COLOR_SUCCESS)
                 #  motor1/Izquierdo = -1 - motor2/derecho = 1
 
             else:
+                ledon.off()
                 self.lbl_left.config(bg=l.COLOR_INACTIVE)
                 # motor1/Izquierdo = 0 - motor2/derecho = 0
-
-            # rc.turnUPDOWN_left(self, release)
 
 if __name__ == '__main__':
     App()

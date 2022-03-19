@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
- <LOGS>
-     <path_debug>LOGS/debug.log</path_debug>
-     <path_error>LOGS/error.log</path_error>
-     <path_warn>LOGS/warn.log</path_warn>
-     <path_info>LOGS/info.log</path_info>
-     <name_debug>debug_logger</name_debug>
-     <name_error>error_logger</name_error>
-     <name_warn>warn_logger</name_warn>
-     <name_info>info_logger</name_info>
- </LOGS>
- <LITERALES>
-     <log_format>"%(name)s -> %(levelname)s: %(message)s"</log_format>
-     <error_literal>Literal no existe o mensaje vacío</error_literal>
- </LITERALES>
- 
+    <version>0.0.0</version>
+    <LOGS>
+        <path_debug>LOGS/debug.log</path_debug>
+        <path_error>LOGS/error.log</path_error>
+        <path_warn>LOGS/warn.log</path_warn>
+        <path_info>LOGS/info.log</path_info>
+        <name_debug>debug_logger</name_debug>
+        <name_error>error_logger</name_error>
+        <name_warn>warn_logger</name_warn>
+        <name_info>info_logger</name_info>
+    </LOGS>
+    <LITERALES>
+        <log_format>"%(name)s -> %(levelname)s: %(message)s"</log_format>
+        <error_literal>Literal no existe o mensaje vacío</error_literal>
+    </LITERALES>
 </config>

@@ -23,11 +23,15 @@ from tkinter import ttk
 from gpiozero import LED, Motor
 from gpiozero.pins.pigpio import PiGPIOFactory
 
+import os
+from time import sleep
+os.environ["PIGPIO_ADDR"] = "192.168.31.150"
+os.environ["GPIOZERO_PIN_FACTORY"] = "pigpio"
 
-factory = PiGPIOFactory(host='192.168.31.150')
-ledon = LED(17, pin_factory=factory)
-#motor1 = Motor(23, 24, pwm=True, pin_factory=factory)
-#motor1.forward()
+ledon = LED(17)
+motor1 = Motor(forward=23, backward=24, enable=18)
+motor2 = Motor(forward=6, backward=5, enable=19)
+
 
 # Modulo de sistema
 # Lo usaremos para desactivar el keystroke si hacemos hold en alguna tecla
@@ -155,11 +159,15 @@ class GUI:
             self.onoff_up = False if self.onoff_up else True
             if self.onoff_up:
                 ledon.on()
+                motor1.forward(speed=1.0)
+                motor2.forward(speed=1.0)
                 self.lbl_up.config(bg=l.COLOR_SUCCESS)
                 # motor1/Izquierdo = 1 - motor2/derecho = 1
 
             else:
                 ledon.off()
+                motor1.stop()
+                motor2.stop()
                 self.lbl_up.config(bg=l.COLOR_INACTIVE)
                 # motor1/Izquierdo = 0 - motor2/derecho = 0
 
@@ -167,35 +175,47 @@ class GUI:
             self.onoff_down = False if self.onoff_down else True
             if self.onoff_down:
                 ledon.on()
+                motor1.backward(speed=1.0)
+                motor2.backward(speed=1.0)
                 self.lbl_back.config(bg=l.COLOR_SUCCESS)
                 #  motor1/Izquierdo = -1 - motor2/derecho = -1
 
             else:
                 ledon.off()
+                motor1.stop()
+                motor2.stop()
                 self.lbl_back.config(bg=l.COLOR_INACTIVE)
                 #  motor1/Izquierdo = 0 - motor2/derecho = 0
 
         elif key == 'Right':
             self.onoff_right = False if self.onoff_right else True
             if self.onoff_right:
+                motor1.forward(speed=1.0)
+                motor2.backward(speed=1.0)
                 ledon.on()
                 self.lbl_right.config(bg=l.COLOR_SUCCESS)
                 #  motor1/Izquierdo = 1 - motor2/derecho = -1
 
             else:
                 ledon.off()
+                motor1.stop()
+                motor2.stop()
                 self.lbl_right.config(bg=l.COLOR_INACTIVE)
                 # motor1/Izquierdo = 0 - motor2/derecho = 0
 
         elif key == 'Left':
             self.onoff_left = False if self.onoff_left else True
             if self.onoff_left:
+                motor1.backward(speed=1.0)
+                motor2.forward(speed=1.0)
                 ledon.on()
                 self.lbl_left.config(bg=l.COLOR_SUCCESS)
                 #  motor1/Izquierdo = -1 - motor2/derecho = 1
 
             else:
                 ledon.off()
+                motor1.stop()
+                motor2.stop()
                 self.lbl_left.config(bg=l.COLOR_INACTIVE)
                 # motor1/Izquierdo = 0 - motor2/derecho = 0
 
